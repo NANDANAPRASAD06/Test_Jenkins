@@ -1,5 +1,8 @@
 pipeline{
   agent any
+  environment{
+    test = credentials('testcredentials')
+    }
   stages{
     stage("build"){
       steps{
