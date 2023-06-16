@@ -14,5 +14,16 @@ pipeline {
                 echo "$test_USR"
             }
         }
+        stage('cat README file'){
+            when{
+                branch "fix-*"
+            }
+            steps{
+                sh """
+                cat README.md
+                """
+                
+    }
+}
     }
 }
