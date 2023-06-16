@@ -19,11 +19,11 @@ pipeline {
                 branch "fix-*"
             }
             steps{
-                sh '''
-                cat README.md
+                bat '''
+                type README.md
                 '''
                 
-    }
+                }
 }
     }
 }
