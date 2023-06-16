@@ -6,14 +6,15 @@ pipeline{
   stages{
     stage("build"){
       steps{
-        sh """
+        git branch: 'main', credentialsId: 'git_creds', url: 'https://github.com/NANDANAPRASAD06/Test_Jenkins'
+        bat """
           docker build -t hello_there .
         """
       }
     }
     stage("deploy"){
       steps{
-        sh """
+        bat """
         docker run --rm hello_there
         """
       }
