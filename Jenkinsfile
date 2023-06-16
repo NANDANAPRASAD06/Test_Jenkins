@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options {
+      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
+    }
     environment{
     test = credentials('testcredentials')
     }
