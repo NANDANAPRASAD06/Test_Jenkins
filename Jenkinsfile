@@ -1,18 +1,22 @@
-pipeline {
-    agent any
-    options {
-      buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '10', daysToKeepStr: '', numToKeepStr: '10')
-    }
-    environment{
+pipeline{
+  agent any
+  environment{
     test = credentials('testcredentials')
     }
-    stages {
-        stage('Stage 1') {
-            steps {
-                echo 'Hello world!'
-                echo "${BUILD_NUMBER}"
-                echo "$test_USR"
-            }
-        }
+  stages{
+    stage("build"){
+      steps{
+        sh """
+          docker build -t hello_there .
+        """
+      }
     }
+    stage("deploy"){
+      steps{
+        sh """
+        docker run --rm hello_there
+        """
+      }
+    }
+  }
 }
